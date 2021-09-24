@@ -1,12 +1,12 @@
 # ec601_project2
-Twitter/Google/Etc. API
-Build a library (preferable in python) that analyzes twitter feeds:  sentiment of text twitter feed.
 
-Phase 1a
-Write test programs to exercise different twitter APIs.  For example, retrieving tweets, searching per time, hashtags, etc.
-All your programs should be on GitHub including a README file explaining your tests and results.
+Phase 1a - I defined three test programs in project2.py:
 
+print_user_tweets() to print a subset of tweets by a specified user.
+print_current_comments() to print a recently selected set of tweets given by search string.
+get_trends_by_location() to print a list of trends by WOEID location.
 
+get_trends_by_location() can be improved through the use of a Yahoo API look-up search for WOEID locations given the name of the location as WOEID's are not commonly known
 
 Phase 1b
 Write test programs to exercise different Google NLP APIs.  Focus on Sentiment analysis.
