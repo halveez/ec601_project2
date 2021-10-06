@@ -1,4 +1,4 @@
-# ec601_project2
+# EC601 Project 2
 
 ## Phase 1a - I defined three test programs in project2.py:
 
