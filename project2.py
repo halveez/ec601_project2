@@ -1,5 +1,5 @@
 #Zachary Halvorson, Boston University 2021
-#EC601 Project 2 Phase 1a
+#EC601 Project 2 Final
 
 
 #Following the getting started documentation at:
@@ -12,12 +12,25 @@
 #https://stackoverflow.com/questions/45501082/set-google-application-credentials-in-python-project-to-use-google-api
 #https://googleapis.dev/python/language/latest/usage.html
 
+#Following the guide below, I utilized "Odds-API" to pull live sports betting odds for specific events
+#https://the-odds-api.com/liveapi/guides/v4/#parameters
+import json
+import requests
+import argparse
+
+API_KEY = ''
+SPORT = 'mma_mixed_martial_arts'
+REGIONS = 'us' # uk | us | eu | au
+MARKETS  = 'h2h,spreads,totals' # h2h | spreads | totals
+ODDS_FORMAT = 'decimal' # decimal | american
+DATE_FORMAT = 'iso' # iso | unix
+
 import tweepy
 
 # Imports the Google Cloud client library
 from google.cloud import language_v1
 import os
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="XXX"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]=""
 
 # Instantiates a Google client
 client = language_v1.LanguageServiceClient()
@@ -83,6 +96,37 @@ def google_nlp_current_entities(search_query):
 				print('     metadata: {0}'.format(entity.metadata))
 				print('     salience: {0}'.format(entity.salience))
 
+def get_current_matches():
+	# Pulled from https://github.com/the-odds-api/samples-python/blob/master/sample-v4.py
+	odds_response = requests.get(f'https://api.the-odds-api.com/v4/sports/{SPORT}/odds', params={
+    	'api_key': API_KEY,
+    	'regions': REGIONS,
+    	'markets': MARKETS,
+    	'oddsFormat': ODDS_FORMAT,
+    	'dateFormat': DATE_FORMAT,
+	})
+
+	if odds_response.status_code != 200:
+	    print(f'Failed to get odds: status_code {odds_response.status_code}, response body {odds_response.text}')
+	else:
+	    odds_json = odds_response.json()
+	    print('Number of events:', len(odds_json))
+	    print(odds_json)
+
+	    # Check the usage quota
+	    print('Remaining requests', odds_response.headers['x-requests-remaining'])
+	    print('Used requests', odds_response.headers['x-requests-used'])
+
+	# Save the data to reduce API requests during testing
+	with open('data.json', 'w') as f:
+		json.dump(odds_json, f)
+
+
+
+def filter_matches():
+	with open('data.json') as f:
+		d = json.load(f)
+		print(d)
 
 
 if __name__ == "__main__":
@@ -110,8 +154,14 @@ if __name__ == "__main__":
 	# print("Sentiment Analysis - Robbie Lawler Tweets")
 	# google_nlp_current_sentiment("Robbie Lawler")
 
-	print("Entity Analysis - Nick Diaz Tweets")
-	google_nlp_current_entities("Nick Diaz")
+	# print("Entity Analysis - Nick Diaz Tweets")
+	# google_nlp_current_entities("Nick Diaz")
 
-	print("Entity Analysis - Robbie Lawler Tweets")
-	google_nlp_current_entities("Robbie Lawler")
+	# print("Entity Analysis - Robbie Lawler Tweets")
+	# google_nlp_current_entities("Robbie Lawler")
+
+	print("Odds-API")
+	#get_current_matches()
+
+	print("Saved Odds-API")
+	filter_matches()
