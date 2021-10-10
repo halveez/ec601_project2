@@ -18,6 +18,12 @@ google_nlp_current_entities() - returns the entity analysis results of a recent 
 
 ## Phase 2:  Build your own social media analyzer
 
+Building upon the previous phases, I incorporated "The Odds API" to pull sports bettings for MMA fighters, and then incorporated those results into a Google Sentiment Analysis and Twitter Based Tweet search to display alongside the betting lines. This combined access to information will allow sports betters or bookies to more accurately assess public sentiment around bets, and make more informted decisions more rapidly.
+
+get_current_matches() - must be called initially to request the information from Odds API, then storing the information in a JSON file that is saved to prevent repeated API calls
+fighter_information_request() - loads the saved data, formats the list of fighters, and presents it to the user for selection from an alphabetized and numbered list, calling other helper functions that follow
+fighter_research() - calls google_nlp_current_sentiment() on the fighter's name that was selected by the user, and also validates the selection before calling a printer function to display the betting data
+match_printer() - function defined specifically for printing the JSON match data for a specific fight, can later be expanded to print the information in a table format, or other method
 
 ### User Story:
 
@@ -38,26 +44,12 @@ This tool is for US based sports gamblers and bookies to view real-time sentimen
 2. Selection is processed and API's are called:
 	2a. Twitter for real time text related to query
 	2b. Google NLP on Twitter content for sentiment analysis
-	2c. Multiple sports betting API's for current lines for the event
-	2d. Possibly: Query news stories and articles for text analysis as well
+	2c. Sports betting API's for current lines for the event
 
 3. Results are displayed to the user 
 
-4. User inputs a decision to bet, and tool stores that decision
+4. (Not in MVP) User inputs a decision to bet, and tool stores that decision
 
-5. After the event, the tool compares the user decision to final result of that bet
+5. (Not in MVP) After the event, the tool compares the user decision to final result of that bet
 	5a. Later used for algorithm development, labeled bets with text as inputs for ML model
 
-
-
-## TO-DO:
-
-Error conditions
-What happens if twitter is not responding
-What happens if I pass the wrong handle
-What happens if Google NLP API does not respond back
-Data back and forth
-What do I send?
-What do I get?
-What is the format of the data?
-How can I use such data?

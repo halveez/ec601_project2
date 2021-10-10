@@ -123,10 +123,49 @@ def get_current_matches():
 
 
 
-def filter_matches():
+def fighter_information_request():
+	fighter_list = []
+
 	with open('data.json') as f:
 		d = json.load(f)
-		print(d)
+
+	for match in d:
+		fighter_list.append(match["home_team"])
+		fighter_list.append(match["away_team"])
+
+	# Sort alphabetically and print with numbers for user selection
+	fighter_list.sort()
+	for i in range(1, len(fighter_list)):
+		print(str(i) + '. ' + fighter_list[i])
+
+	# Validate number selected from range
+	print("Please select a fighter for further analysis:")
+	fighter_selection = int(input())
+	if (fighter_selection in range(1, len(fighter_list))):
+		# Calls other functions
+		fighter_research(fighter_list[fighter_selection], d, fighter_list)
+	else:
+		print("Invalid user input")
+
+def fighter_research(fighter_name, saved_bets, fighter_list):
+
+	print(fighter_name)
+	# Google Sentiment Analysis on Twitter comments 
+	print("Google Sentiment Analysis on Twitter Tweets from Fighter Name Selection")
+	google_nlp_current_sentiment(fighter_name)
+
+	# Formatting and displaying of betting odds for specific fighter
+	for match in saved_bets:
+		if (match["home_team"] == fighter_name):
+			match_printer(match, fighter_name)
+		elif (match["away_team"] == fighter_name):
+			match_printer(match, fighter_name)
+
+
+def match_printer(match, fighter_name):
+	print("Bettings Odds for " + fighter_name)
+	print(json.dumps(match, indent=2))
+
 
 
 if __name__ == "__main__":
@@ -160,8 +199,8 @@ if __name__ == "__main__":
 	# print("Entity Analysis - Robbie Lawler Tweets")
 	# google_nlp_current_entities("Robbie Lawler")
 
-	print("Odds-API")
-	#get_current_matches()
+	# print("Odds-API")
+	# get_current_matches()
 
 	print("Saved Odds-API")
-	filter_matches()
+	fighter_information_request()
