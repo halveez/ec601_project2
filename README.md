@@ -3,7 +3,9 @@
 ## Phase 1a - I defined three test programs in project2.py:
 
 print_user_tweets() to print a subset of tweets by a specified user.
+
 print_current_comments() to print a recently selected set of tweets given by search string.
+
 get_trends_by_location() to print a list of trends by WOEID location.
 
 get_trends_by_location() can be improved through the use of a Yahoo API look-up search for WOEID locations given the name of the location as WOEID's are not commonly known
@@ -13,16 +15,20 @@ get_trends_by_location() can be improved through the use of a Yahoo API look-up 
 Building upon "print_current_comments()", I incorporated Google NLP API's for sentiment analysis and entity analysis on recent tweets by keyword search:
 
 google_nlp_current_sentiment() - returns the sentiment analysis of a recent set of tweets by search string
+
 google_nlp_current_entities() - returns the entity analysis results of a recent set of tweets by search string
 
 
 ## Phase 2:  Build your own social media analyzer
 
-Building upon the previous phases, I incorporated "The Odds API" to pull sports bettings for MMA fighters, and then incorporated those results into a Google Sentiment Analysis and Twitter Based Tweet search to display alongside the betting lines. This combined access to information will allow sports betters or bookies to more accurately assess public sentiment around bets, and make more informted decisions more rapidly.
+Building upon the previous phases, I incorporated [The Odds API](https://the-odds-api.com/liveapi/guides/v4/#overview) to pull sports betting odds for MMA fighters, and then incorporated those results into a Google Sentiment Analysis and Twitter Based Tweet search to display alongside the betting lines. This combined access to information will allow sports betters or bookies to more accurately assess public sentiment around bets, and make more informted decisions more rapidly.
 
 get_current_matches() - must be called initially to request the information from Odds API, then storing the information in a JSON file that is saved to prevent repeated API calls
+
 fighter_information_request() - loads the saved data, formats the list of fighters, and presents it to the user for selection from an alphabetized and numbered list, calling other helper functions that follow
+
 fighter_research() - calls google_nlp_current_sentiment() on the fighter's name that was selected by the user, and also validates the selection before calling a printer function to display the betting data
+
 match_printer() - function defined specifically for printing the JSON match data for a specific fight, can later be expanded to print the information in a table format, or other method
 
 ### User Story:
