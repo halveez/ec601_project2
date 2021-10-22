@@ -1,7 +1,6 @@
 #Zachary Halvorson, Boston University 2021
 #EC601 Project 2 Final
 
-
 #Following the getting started documentation at:
 #https://docs.tweepy.org/en/stable/getting_started.html
 #https://github.com/tweepy/tweepy
@@ -198,6 +197,12 @@ if __name__ == "__main__":
 
 	# print("Entity Analysis - Robbie Lawler Tweets")
 	# google_nlp_current_entities("Robbie Lawler")
+
+
+	# When running for the first time, call get_current_matches() to get the most current list of upcoming fights and fighters from Odds-API
+
+	# After calling get_current_matches(), call fighter_information_request to use the saved JSON from the first call to avoid unecessary API calls.
+
 
 	# print("Odds-API")
 	# get_current_matches()
