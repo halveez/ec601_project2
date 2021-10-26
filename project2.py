@@ -17,6 +17,8 @@ import json
 import requests
 import argparse
 
+import sys
+
 API_KEY = ''
 SPORT = 'mma_mixed_martial_arts'
 REGIONS = 'us' # uk | us | eu | au
@@ -144,6 +146,7 @@ def fighter_information_request():
 		# Calls other functions
 		fighter_research(fighter_list[fighter_selection], d, fighter_list)
 	else:
+		print("Invalid user input", file=sys.stderr)
 		print("Invalid user input")
 
 def fighter_research(fighter_name, saved_bets, fighter_list):
