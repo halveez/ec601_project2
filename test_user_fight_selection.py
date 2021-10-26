@@ -21,7 +21,7 @@ def test_within_range(capfd):
     p2.fighter_information_request()
     out, err = capfd.readouterr()
 
-    assert out != "Invalid user input\n"
+   assert out != "Invalid user input\n"
 
 # Followed these guides for capturing error printing, simulating user inputs, etc.
 # https://stackoverflow.com/questions/5574702/how-to-print-to-stderr-in-python

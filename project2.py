@@ -109,7 +109,9 @@ def get_current_matches():
 
 	if odds_response.status_code != 200:
 	    print(f'Failed to get odds: status_code {odds_response.status_code}, response body {odds_response.text}')
+	    return
 	else:
+	    print("Odds API Call Succeeded", file=sys.stderr)
 	    odds_json = odds_response.json()
 	    print('Number of events:', len(odds_json))
 	    print(odds_json)
@@ -121,8 +123,6 @@ def get_current_matches():
 	# Save the data to reduce API requests during testing
 	with open('data.json', 'w') as f:
 		json.dump(odds_json, f)
-
-
 
 def fighter_information_request():
 	fighter_list = []
@@ -163,11 +163,9 @@ def fighter_research(fighter_name, saved_bets, fighter_list):
 		elif (match["away_team"] == fighter_name):
 			match_printer(match, fighter_name)
 
-
 def match_printer(match, fighter_name):
 	print("Bettings Odds for " + fighter_name)
 	print(json.dumps(match, indent=2))
-
 
 
 if __name__ == "__main__":
@@ -201,14 +199,14 @@ if __name__ == "__main__":
 	# print("Entity Analysis - Robbie Lawler Tweets")
 	# google_nlp_current_entities("Robbie Lawler")
 
-
 	# When running for the first time, call get_current_matches() to get the most current list of upcoming fights and fighters from Odds-API
 
 	# After calling get_current_matches(), call fighter_information_request to use the saved JSON from the first call to avoid unecessary API calls.
 
-
 	# print("Odds-API")
 	# get_current_matches()
 
-	print("Saved Odds-API")
-	fighter_information_request()
+	# print("Saved Odds-API")
+	# fighter_information_request()
+
+	print("Hello World!")
