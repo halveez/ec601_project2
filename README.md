@@ -1,4 +1,4 @@
-# EC601 Project 2
+# EC601 Project 2 and Project 3
 
 ## Phase 1a - I defined three test programs in project2.py:
 
@@ -58,4 +58,9 @@ This tool is for US based sports gamblers and bookies to view real-time sentimen
 
 5. (Not in MVP) After the event, the tool compares the user decision to final result of that bet
 	5a. Later used for algorithm development, labeled bets with text as inputs for ML model
+	
+	
+### Project 3:
+
+Added PyTest files for unit testing.
 
